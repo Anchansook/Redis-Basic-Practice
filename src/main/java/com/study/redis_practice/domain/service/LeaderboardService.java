@@ -38,4 +38,16 @@ public class LeaderboardService {
     return redisTemplate.opsForZSet().reverseRank(LEADERBOARD_KEY, userId);
   }
 
+  // 유저 점수 조회
+  public Double getUserScore(String userId) {
+    try {
+      Double score = redisTemplate.opsForZSet().score(LEADERBOARD_KEY, userId);
+      return score;
+
+    } catch (Exception exception) {
+      log.error("Error fetching score for user: {}", exception.getMessage());
+      throw new RuntimeException("Failed to get user score", exception);
+    }
+  }
+
 }
