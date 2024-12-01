@@ -2,6 +2,7 @@ package com.study.redis_practice.domain.user.controller;
 
 import com.study.redis_practice.domain.service.CacheService;
 import com.study.redis_practice.domain.user.model.User;
+import io.swagger.v3.oas.annotations.Operation;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 public class UserController {
   private final CacheService cacheService;
 
   // 유저 생성
+  @Operation(summary = "유저 생성", description = "새로운 유저를 생성합니다.")
   @PostMapping
   public ResponseEntity<?> createUser(
       @RequestBody User user
@@ -31,6 +33,7 @@ public class UserController {
   }
 
   // 유저 조회
+  @Operation(summary = "유저 조회", description = "경로에 해당되는 유저를 조회합니다.")
   @GetMapping("/{id}")
   public ResponseEntity<?> getUser(
       @PathVariable Long id
